@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: DeciderPrototype
+  cloud:
+    aws:
+      credentials:
+        access-key: ${AWS_ACCESS_KEY_ID}
+        secret-key: ${AWS_SECRET_ACCESS_KEY}
+      endpoint: http://localhost:4566
+  ai:
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY}
+        chat:
+          model: gemini-3.6-flash
+    mcp:
+      client:
+        enabled: true
+        name: gemini-decider-client
+        version: 1.0.0
+        request-timeout: 30s
+        type: SYNC
+        streamable-http:
+          connections:
+            tuningprototype:
+              url: http://localhost:8080
