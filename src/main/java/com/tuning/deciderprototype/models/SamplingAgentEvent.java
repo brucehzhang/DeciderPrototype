@@ -5,6 +5,7 @@ public record SamplingAgentEvent(
         Long experimentId,
         String strategyPrompt,
         AgentModel agentModel,
+        SamplingWindow samplingWindow,
         Long sampleId,
         Long samplingTime,
         ExperimentFinances experimentFinances) {
