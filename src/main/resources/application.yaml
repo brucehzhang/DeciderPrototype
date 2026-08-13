@@ -7,6 +7,14 @@ spring:
         access-key: ${AWS_ACCESS_KEY_ID}
         secret-key: ${AWS_SECRET_ACCESS_KEY}
       endpoint: http://localhost:4566
+    stream:
+      bindings:
+        # <consumerBeanName>-<in/out>-<index>
+        samplingAgentEventConsumer-in-0:
+          destination: sampling_agent_event_stream
+          # Consumer group (each message will only be consumed once per group)
+          # Auto-creates DynamoDb for metadata and distributed lock
+          group: sampling_agent_consumer_group
   ai:
     google:
       genai:
@@ -16,7 +24,7 @@ spring:
     mcp:
       client:
         enabled: true
-        name: gemini-decider-client
+        name: sampling-decider-client
         version: 1.0.0
         request-timeout: 30s
         type: SYNC
