@@ -1,7 +1,11 @@
 package com.tuning.deciderprototype.agents;
 
 import com.tuning.deciderprototype.models.AgentModel;
+import org.springframework.ai.anthropic.AnthropicChatOptions;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -21,6 +25,12 @@ public class OpenAiAgentClient implements AgentClient {
             AgentModel.GPT_5_6_LUNA, "gpt-5.6-luna"
     );
 
+    private final ChatClient _chatClient;
+
+    public OpenAiAgentClient(@Qualifier("openAiChatClient") ChatClient chatClient) {
+        _chatClient = chatClient;
+    }
+
     @Override
     public boolean supports(AgentModel agentModel) {
         return SUPPORTED.containsKey(agentModel);
@@ -28,6 +38,15 @@ public class OpenAiAgentClient implements AgentClient {
 
     @Override
     public void beginDecisionMaking(Prompt startingPrompt, AgentModel model) {
-        System.out.println(startingPrompt);
+        System.out.println("Begin decision making for OpenAI model " + model + " with starting prompt: " + startingPrompt);
+        String modelName = SUPPORTED.get(model);
+
+        ChatResponse response = _chatClient.prompt(startingPrompt)
+                .options(AnthropicChatOptions.builder()
+                        .model(modelName))
+                .call()
+                .chatResponse();
+
+        System.out.println("OpenAI model " + model + " decision making response: " + response.toString());
     }
 }

@@ -32,3 +32,5 @@ spring:
           connections:
             tuningprototype:
               url: http://localhost:8080
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY}
