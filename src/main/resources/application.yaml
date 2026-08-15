@@ -4,17 +4,18 @@ spring:
   cloud:
     aws:
       credentials:
-        access-key: ${AWS_ACCESS_KEY_ID}
-        secret-key: ${AWS_SECRET_ACCESS_KEY}
-      endpoint: http://localhost:4566
-    stream:
-      bindings:
-        # <consumerBeanName>-<in/out>-<index>
-        samplingAgentEventConsumer-in-0:
-          destination: sampling_agent_event_stream
-          # Consumer group (each message will only be consumed once per group)
-          # Auto-creates DynamoDb for metadata and distributed lock
-          group: sampling_agent_consumer_group
+        profile:
+          name: default
+#    Not needed since we are using credentials from ~/.aws/credentials, uncomment if static properties are needed
+#        access-key: ${AWS_ACCESS_KEY_ID}
+#        secret-key: ${AWS_SECRET_ACCESS_KEY}
+#
+#   Temporarily disable this because kinesis is not on free tier. Using SQS instead.
+#    stream:
+#      bindings:
+#        # <identifier>-<in/out>-<index>
+#        publishSamplingAgentEvent-out-0:
+#          destination: sampling_agent_event_stream
   ai:
     google:
       genai:

@@ -35,7 +35,9 @@ dependencies {
     implementation platform("io.awspring.cloud:spring-cloud-aws-dependencies:${springCloudAwsVersion}")
     // Add further AWS starter or BOM dependencies here
     implementation 'io.awspring.cloud:spring-cloud-aws-starter'
-    implementation 'io.awspring.cloud:spring-cloud-aws-kinesis-stream-binder'
+    implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs'
+//    implementation 'io.awspring.cloud:spring-cloud-aws-kinesis-stream-binder'
+    implementation 'software.amazon.awssdk:signin'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-restclient-test'
