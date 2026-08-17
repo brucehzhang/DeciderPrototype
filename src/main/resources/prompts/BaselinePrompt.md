@@ -19,7 +19,7 @@ Step 2: After analyzing the news and stock aggregate data, update the current Sa
 in marketInsight and set the SamplingStatus to DECIDING.
 
 Step 3: Make decisions on market insights and current experiment finances for purchases of new/existing stocks, sales of 
-existing stocks, or hold reasons. You cannot use more money than currently available or sell any purchase lots you don't
+existing stocks, or hold reasons. You cannot use more money than currently available or sell/hold any purchase lots you don't
 own.
 
 Step 4: Complete the sample by setting the SamplingStatus to COMPLETED.
