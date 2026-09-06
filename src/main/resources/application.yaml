@@ -32,6 +32,16 @@ spring:
         streamable-http:
           connections:
             tuningprototype:
-              url: http://localhost:8080
+              url: https://l5qsvdpaa7.execute-api.ap-southeast-2.amazonaws.com
+              endpoint: /EC2-Prototype/mcp
     anthropic:
       api-key: ${ANTHROPIC_API_KEY}
+
+logging:
+  level:
+#    io.modelcontextprotocol: TRACE
+#    org.springframework.ai.mcp: DEBUG
+#    org.springframework.web.reactive.function.client: DEBUG
+    root: INFO
+  file:
+    name: logs/application.log
