@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: DeciderPrototype
+  cloud:
+    aws:
+      region:
+        static: ${AWS_REGION}
+  config:
+    import: "aws-secretsmanager:tuning_server_secrets"
+  #    Not needed since we are using credentials from ~/.aws/credentials, uncomment if static properties are needed
+  #        access-key: ${AWS_ACCESS_KEY_ID}
+  #        secret-key: ${AWS_SECRET_ACCESS_KEY}
+  #
+  #   Temporarily disable this because kinesis is not on free tier. Using SQS instead.
+  #    stream:
+  #      bindings:
+  #        # <identifier>-<in/out>-<index>
+  #        publishSamplingAgentEvent-out-0:
+  #          destination: sampling_agent_event_stream
+  ai:
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY}
+        chat:
+          model: gemini-3.6-flash
+    mcp:
+      client:
+        enabled: true
+        name: sampling-decider-client
+        version: 1.0.0
+        request-timeout: 30s
+        type: SYNC
+        streamable-http:
+          connections:
+            tuningprototype:
+              url: https://l5qsvdpaa7.execute-api.ap-southeast-2.amazonaws.com
+              endpoint: /EC2-Prototype/mcp
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY}
+
+logging:
+  level:
+    #    io.modelcontextprotocol: TRACE
+    #    org.springframework.ai.mcp: DEBUG
+    #    org.springframework.web.reactive.function.client: DEBUG
+    root: INFO
+  file:
+    name: logs/application.log
+
+server:
+  port: 8081

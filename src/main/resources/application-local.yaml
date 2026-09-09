@@ -6,6 +6,8 @@ spring:
       credentials:
         profile:
           name: default
+  config:
+    import: "aws-secretsmanager:tuning_server_secrets"
 #    Not needed since we are using credentials from ~/.aws/credentials, uncomment if static properties are needed
 #        access-key: ${AWS_ACCESS_KEY_ID}
 #        secret-key: ${AWS_SECRET_ACCESS_KEY}
@@ -45,3 +47,6 @@ logging:
     root: INFO
   file:
     name: logs/application.log
+
+server:
+  port: 8081
